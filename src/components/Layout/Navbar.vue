@@ -1,0 +1,3 @@
+<template>
+  My Navbar
+</template>
