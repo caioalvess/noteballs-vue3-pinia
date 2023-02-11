@@ -15,7 +15,7 @@
       <div class="field is-grouped is-grouped-right">
         <div class="control">
           <button
-            @click="addNotes"
+            @click="addNotes()"
             :disabled="!newNote"
             class="button is-link has-background-success"
           >
@@ -27,10 +27,9 @@
 
     <div v-auto-animate>
       <Note
-        v-for="note in notes"
+        v-for="note in storeNotes.notes"
         :key="note.id"
         :note="note"
-        @deleteClicked="deleteNote"
       />
     </div>
   </div>
@@ -45,6 +44,13 @@ import { vAutoAnimate } from "@formkit/auto-animate";
 
 import Note from "../components/Notes/Note.vue";
 
+import { useNotesStore } from "../stores/notes.js";
+
+/*
+STORE
+*/
+const storeNotes = useNotesStore();
+
 /*
 NOTES
 */
@@ -52,51 +58,13 @@ const newNote = ref("");
 
 const newNoteRef = ref(null);
 
-const notes = ref([
-  {
-    id: "1",
-    content:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elitr, adipisicing elitr, adipisicing elitr, adipisicing elitr, adipisicing elitr, adipisicing elitr, adipisicing elitr, adipisicing elitr, adipisicing elit.",
-  },
-  {
-    id: "2",
-    content: "adipisicing elit.",
-  },
-  {
-    id: "3",
-    content: "elit.",
-  },
-]);
-
 const addNotes = () => {
-  let currentDate = new Date().getTime();
-  let id = currentDate.toString();
-
-  let note = {
-    id,
-    content: newNote.value,
-  };
-
-  notes.value.unshift(note);
+  storeNotes.addNewNote(newNote.value);
 
   newNote.value = "";
 
   newNoteRef.value.focus();
 };
 
-/*
-DELETE NOTE
-*/
-const deleteNote = (idToDelete) => {
-  notes.value = notes.value.filter((note) => {
-    return note.id !== idToDelete;
-  });
-};
-
 </script>
 
-<style>
-  .notes {
-    margin-top: 4rem;
-  }
-</style>
