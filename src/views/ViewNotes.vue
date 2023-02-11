@@ -25,8 +25,14 @@
       </div>
     </div>
 
-    <Note v-for="note in notes" :key="note.id" :note="note" />
-
+    <div v-auto-animate>
+      <Note
+        v-for="note in notes"
+        :key="note.id"
+        :note="note"
+        @deleteClicked="deleteNote"
+      />
+    </div>
   </div>
 </template>
 
@@ -35,6 +41,7 @@
 IMPORTS
 */
 import { ref } from "vue";
+import { vAutoAnimate } from "@formkit/auto-animate";
 
 import Note from "../components/Notes/Note.vue";
 
@@ -76,5 +83,20 @@ const addNotes = () => {
 
   newNoteRef.value.focus();
 };
+
+/*
+DELETE NOTE
+*/
+const deleteNote = (idToDelete) => {
+  notes.value = notes.value.filter((note) => {
+    return note.id !== idToDelete;
+  });
+};
+
 </script>
 
+<style>
+  .notes {
+    margin-top: 4rem;
+  }
+</style>
