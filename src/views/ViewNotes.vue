@@ -1,6 +1,6 @@
 <template>
   <div class="notes">
-    <div class="card has-background-success-dark p-4 mb-5">
+    <!-- <div class="card has-background-success-dark p-4 mb-5">
       <div class="field">
         <div class="control">
           <textarea
@@ -23,14 +23,22 @@
           </button>
         </div>
       </div>
-    </div>
+    </div>  -->
+
+    <AddEditNote>
+      <template #buttons>
+        <button
+          @click="addNotes()"
+          :disabled="!newNote"
+          class="button is-link has-background-success"
+        >
+          Add New Note
+        </button>
+      </template>
+    </AddEditNote>
 
     <div v-auto-animate>
-      <Note
-        v-for="note in storeNotes.notes"
-        :key="note.id"
-        :note="note"
-      />
+      <Note v-for="note in storeNotes.notes" :key="note.id" :note="note" />
     </div>
   </div>
 </template>
@@ -43,6 +51,7 @@ import { ref } from "vue";
 import { vAutoAnimate } from "@formkit/auto-animate";
 
 import Note from "../components/Notes/Note.vue";
+import AddEditNote from "../components/Notes/AddEditNote.vue";
 
 import { useNotesStore } from "../stores/notes.js";
 
@@ -65,6 +74,4 @@ const addNotes = () => {
 
   newNoteRef.value.focus();
 };
-
 </script>
-
