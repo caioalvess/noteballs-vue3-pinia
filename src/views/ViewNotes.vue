@@ -1,6 +1,6 @@
 <template>
   <div class="notes">
-    <AddEditNote v-model="newNote">
+    <AddEditNote v-model="newNote" ref="addEditNoteRef">
       <template #buttons>
         <button
           @click="addNotes()"
@@ -39,14 +39,12 @@ const storeNotes = useNotesStore();
 NOTES
 */
 const newNote = ref("");
-
-const newNoteRef = ref(null);
+const addEditNoteRef = ref(null);
 
 const addNotes = () => {
   storeNotes.addNewNote(newNote.value);
 
   newNote.value = "";
-
-  newNoteRef.value.focus();
+  addEditNoteRef.value.focusTextArea();
 };
 </script>
