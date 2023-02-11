@@ -25,17 +25,8 @@
       </div>
     </div>
 
-    <div v-for="note in notes" :key="note.id" class="card mb-4">
-      <div class="card-content">
-        <div class="content">
-          {{ note.content }}
-        </div>
-      </div>
-      <footer class="card-footer">
-        <a href="#" class="card-footer-item">Edit</a>
-        <a href="#" class="card-footer-item">Delete</a>
-      </footer>
-    </div>
+    <Note v-for="note in notes" :key="note.id" :note="note" />
+
   </div>
 </template>
 
@@ -44,6 +35,8 @@
 IMPORTS
 */
 import { ref } from "vue";
+
+import Note from "../components/Notes/Note.vue";
 
 /*
 NOTES
@@ -84,3 +77,4 @@ const addNotes = () => {
   newNoteRef.value.focus();
 };
 </script>
+
