@@ -1,5 +1,10 @@
 <template>
-  <nav class="navbar is-success is-fixed-top" role="navigation" aria-label="main navigation">
+  <nav
+    class="navbar is-success is-fixed-top"
+    role="navigation"
+    aria-label="main navigation"
+    v-auto-animate
+  >
     <div class="container is-max-desktop">
       <div class="navbar-brand">
         <div class="navbar-item is-size-4 is-family-monospace">Noteballs</div>
@@ -26,10 +31,19 @@
       >
         <div class="navbar-end">
           <div class="navbar-start">
-            <RouterLink to="/" class="navbar-item" active-class="is-active"
+            <RouterLink
+              @click="showMobileNav = false"
+              to="/"
+              class="navbar-item"
+              active-class="is-active"
               >Notes</RouterLink
             >
-            <RouterLink to="/stats" class="navbar-item">Stats</RouterLink>
+            <RouterLink
+              @click="showMobileNav = false"
+              to="/stats"
+              class="navbar-item"
+              >Stats</RouterLink
+            >
           </div>
         </div>
       </div>
@@ -42,6 +56,7 @@
 IMPORTS
 */
 import { ref } from "vue";
+import { vAutoAnimate } from "@formkit/auto-animate";
 
 /*
   MOBILE NAV
@@ -50,11 +65,11 @@ const showMobileNav = ref(false);
 </script>
 
 <style>
-  @media(max-width: 1023px) {
-    .navbar-menu {
-      position: absolute;
-      left: 0;
-      width: 100%;
-    }
+@media (max-width: 1023px) {
+  .navbar-menu {
+    position: absolute;
+    left: 0;
+    width: 100%;
   }
+}
 </style>

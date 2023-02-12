@@ -18,7 +18,13 @@ export const useNotesStore = defineStore("notes", {
       },
     ],
   }),
-  getters: {},
+  getters: {
+    getNoteContent: (state) => {
+      return (id) => {
+        return state.notes.filter(note => note.id === id)[0].content
+      }
+    }
+  },
   actions: {
     addNewNote(newNoteContent) {
       let id = new Date().getTime().toString();
@@ -32,7 +38,12 @@ export const useNotesStore = defineStore("notes", {
     },
 
     deleteNote(idToDelete) {
-      this.notes = this.notes.filter((note) => note.id !== idToDelete);
+      this.notes = this.notes.filter(note => note.id !== idToDelete);
     },
+
+    updateNote(id, content) {
+      let index = this.notes.findIndex(note => note.id === id)
+      this.notes[index].content = content
+    }
   },
 });
